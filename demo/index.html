@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo</title>
+	
+	<!-- awesome fonts -->
+	<link rel="stylesheet" href="../cartjs/plugin/font-awesome-4.6.3/css/font-awesome.min.css">
+	
+	<!-- jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<!-- carjs -->
+	<link href="../cartjs/css/cart.css" rel="stylesheet" type="text/css" />
+	<script id="cartscript" src="../cartjs/cart.js"></script>
+
+	<!-- response -->
+	<link rel="stylesheet" type="text/css" href="response/response.style1.min.css" media="all"> <!--預設響應式樣式-->
+	<link rel="stylesheet" type="text/css" href="response/css/sass.css" media="all"> <!--客製樣式 SASS-->
+	<link rel="stylesheet" type="text/css" href="response/css/nosass.css" media="all"> <!--客製樣式NO SASS-->
+	<script type="text/javascript" src="response/response.min.js"></script> <!--響應式主程式-->
+	<script type="text/javascript" src="response/js/custom.js"></script> <!--客製設定-->
+
+	<!-- initial -->
+	<script>
+		$(function(){
+			$.simplecart({
+				format: 'custom'
+			});
+		})
+	</script>
+
+	<style>
+		body{
+			font-family: Arial, '微軟正黑體';
+		}
+		.itemList img{
+			border:5px solid #F2E8E8;
+			border-radius:10px;
+			box-shadow:0 0 10px #F2E8E8;
+		}
+		.itemList h1{
+			font-family: Arial, '微軟正黑體';
+			font-size:20px;
+			font-weight: normal;
+			margin:5px;
+		}
+		h2{
+			font-weight: normal;
+			text-align: center;
+			background:#F2E8E8;
+			color:#C9A5A5;
+			font-size:20px;
+			padding:10px;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div class="resRow">
+		<div class="resCol12"><div class="resPadding">
+			<img src="img/logo.png" alt="" style="margin:0 auto;">
+		</div></div>
+	</div>
+	
+
+	<h2>列表來自網頁結構中</h2>
+	<div class="resRow itemList">
+		<div class="resCol3"><div class="resMargin item">
+			<img src="img/default.png" alt="">
+			<h1>產品一</h1>
+			<!-- list inquiry btn -->
+            <div class="list_inquiry_box">
+                <label>數量:</label>
+                <input type="number" class="pro-quantity-field" pro-no="001" value="1" min="1" />
+                <a href="#" class="inquiry_btn" pro-no="001" pro-name="產品一" pro-price="100"></a>
+                <div class="clear"></div>
+            </div>
+		</div></div>
+		<div class="resCol3"><div class="resMargin item">
+			<img src="img/default.png" alt="">
+			<h1>產品二</h1>
+			<!-- list inquiry btn -->
+            <div class="list_inquiry_box">
+                <label>數量:</label>
+                <input type="number" class="pro-quantity-field" pro-no="002" value="1" min="1" />
+                <a href="#" class="inquiry_btn" pro-no="002" pro-name="產品二" pro-price="200"></a>
+                <div class="clear"></div>
+            </div>
+		</div></div>
+		<div class="resCol3"><div class="resMargin item">
+			<img src="img/default.png" alt="">
+			<h1>產品三</h1>
+			<!-- list inquiry btn -->
+            <div class="list_inquiry_box">
+                <label>數量:</label>
+                <input type="number" class="pro-quantity-field" pro-no="003" value="1" min="1" />
+                <a href="#" class="inquiry_btn" pro-no="003" pro-name="產品三" pro-price="300"></a>
+                <div class="clear"></div>
+            </div>
+		</div></div>
+		<div class="resCol3"><div class="resMargin item">
+			<img src="img/default.png" alt="">
+			<h1>產品四</h1>
+			<!-- list inquiry btn -->
+            <div class="list_inquiry_box">
+                <label>數量:</label>
+                <input type="number" class="pro-quantity-field" pro-no="004" value="1" min="1" />
+                <a href="#" class="inquiry_btn" pro-no="004" pro-name="產品四" pro-price="400"></a>
+                <div class="clear"></div>
+            </div>
+		</div></div>
+	</div>
+
+	<h2>列表來自JSON格式文件</h2>
+	<div class="resRow itemList">
+		<div class="resCol3"><div class="resMargin item">
+			<img src="img/default.png" alt="">
+			<h1>產品一</h1>
+			<!-- list inquiry btn -->
+            <div class="list_inquiry_box">
+                <label>數量:</label>
+                <input type="number" class="pro-quantity-field" pro-no="001" value="1" min="1" />
+                <a href="#" class="inquiry_btn" pro-no="001" pro-name="產品一" pro-price="100"></a>
+                <div class="clear"></div>
+            </div>
+		</div></div>
+	</div>
+                        
+	
+</body>
+</html>

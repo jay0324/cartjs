@@ -1,0 +1,258 @@
+@import "_css3-mixins.scss";
+
+/* cart style */
+
+/* inpage inquiry box */
+.inquiry_box{
+	float:right;
+	
+	label{
+		float:left;
+		padding:5px 10px;
+		margin:1px;	}
+
+	.pro-quantity-field{
+		width:60px;
+		padding:5px 10px;
+		float:left;
+		margin:1px;
+	}
+
+	.inquiry_btn {
+		display:block;
+		background:#522424;
+		padding:5px 10px;
+		color:#fff !important;
+		text-decoration:none !important;
+		float:left;
+		margin:1px;
+
+		@include transition('all 0.5s');
+
+		&:hover{
+			background:#15466A;
+		}
+
+		&.active{
+			background:#B61C1F;
+			color:#fff;
+		}
+	}
+}
+
+/* list inquiry box */
+.list_inquiry_box{
+	
+	label{
+		float:left;
+		padding:5px 10px;
+		margin:1px;
+	}
+
+	.pro-quantity-field{
+		width:60px;
+		padding:7px 10px;
+		float:left;
+		margin:1px;
+	}
+
+	.inquiry_btn {
+		display:block;
+		background:#522424;
+		padding:5px 10px;
+		color:#fff !important;
+		text-decoration:none !important;
+		float:left;
+		margin:1px;
+		@include border-radius(5px);
+
+		@include transition('all 0.5s');
+
+		&:hover{
+			background:#713939;
+		}
+
+		&.active{
+			background:#B21A1A;
+			color:#fff;
+		}
+	}
+}
+
+/* cart floting box */
+#cart{
+	display:none;
+	position:fixed;
+	bottom:0;
+	right:0;
+	background:#000000;
+	padding:5px;
+	width:250px;
+	height:42px;
+	z-index:1000;
+	@include box-shadow(0,0,10px,#000);
+
+	a{
+		text-decoration: none;
+	}
+
+	.control_wrap{
+		position:relative;
+		margin-bottom:5px;
+		.checkout_btn{
+			display:table;
+			width: 78%;
+		    height: 32px;
+		    margin: 1%;
+		    padding: 1%;
+			border:1px solid #000;
+			background:#522424;
+			color:#fff;
+			float:left;
+			cursor:pointer;
+			overflow:auto;
+			@include transition('background 0.5s');
+			&:hover{
+				background:#794343;
+				text-decoration: none;
+			}
+			span{
+				display:table-cell;
+				width:96%;
+				height:98%;
+				padding:1% 2%;
+				vertical-align: middle;
+			}
+		}
+		.expend_btn{
+			display:table;
+			width:12%;
+			height:32px;
+			margin:1%;
+			padding:1%;
+			border:1px solid #000;
+			background:#522424;
+			color:#fff;
+			float:right;
+			text-align: center;
+			cursor:pointer;
+			@include transition('background 0.5s');
+			&:hover{
+				background:#794343;
+			}
+			span{
+				display:table-cell;
+				width:96%;
+				height:98%;
+				padding:1% 2%;
+				vertical-align: middle;
+			}
+		}
+	}
+	.list-wrapper{
+		height:94%;
+		overflow:auto;
+		clear:both;
+		.item{
+			position:relative;
+			border:1px solid #ccc;
+			background:#fff;
+			margin: 1%;
+		    padding: 1%;
+		    width: 96%;
+		    text-align: left;
+			.delete_btn{
+				padding:2px 8px;
+				position:absolute;
+				top:2px;
+				right:2px;
+				background:#522424;
+				color:#fff;
+				cursor:pointer;
+				@include transition('background 0.5s');
+				&:hover{
+					background:#764646;
+				}
+			}
+			.pro-quantity-field{
+				width:60px;
+			}
+		}
+	}
+}
+
+/* submiting page container */
+.inquiries_container{
+	label{
+		font-weight: bold;
+		display:block;
+		padding:5px;
+		background:#522424;
+		color:#fff;
+		@include border-radius(5px 5px 0 0);
+	}
+	#inquiries_block{
+		border:1px solid #522424;
+		border-top:0;
+		padding:5px;
+		margin-bottom:10px;
+		margin-top:0;
+		background:#ffffff;
+		@include border-radius(0 0 5px 5px);
+	
+		.item{
+			border: 1px solid #522424;
+    		padding: 5px 5px 5px 30px;
+    		margin:5px;
+    		background:#F2EDED;
+			width:auto;
+    		position:relative;
+    		@include border-radius(3px);
+			.btn{
+				float:left;
+				padding:5px 10px;
+				margin:5px 10px 5px 5px;
+				cursor:pointer;
+			}
+			input{
+				height: auto;
+    			width: 150px;
+			}
+			.delete_btn{
+				    padding: 0 5px;
+				position:absolute;
+				top:5px;
+				left:5px;
+				background:#fff;
+				cursor:pointer;
+				background:#522424;
+				color:#fff;
+				@include border-radius(2px);
+				@include transition('background 0.5s');
+				&:hover{
+					color:#fff;
+					background:#764646;
+				}
+			}
+			.pro-quantity-field{
+				width:40px;
+			}
+			.amt_field{
+				float:right;
+			}
+		}
+
+		.total_price{
+			text-align: right;
+    		padding: 0 10px;
+		}
+	}
+}
+
+@media screen and (max-width: 960px) {
+	.inquiries_container #inquiries_block .item .delete_btn .fa,
+	#cart .fa{
+	    font-size:12px !important;
+	    display:inline-block;
+	}
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo</title>
+	
+	<!-- awesome fonts -->
+	<link rel="stylesheet" href="../cartjs/plugin/font-awesome-4.6.3/css/font-awesome.min.css">
+	
+	<!-- jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<!-- carjs -->
+	<link href="../cartjs/css/cart.css" rel="stylesheet" type="text/css" />
+	<script id="cartscript" src="../cartjs/cart.js"></script>
+
+	<!-- response -->
+	<link rel="stylesheet" type="text/css" href="response/response.style1.min.css" media="all"> <!--預設響應式樣式-->
+	<link rel="stylesheet" type="text/css" href="response/css/sass.css" media="all"> <!--客製樣式 SASS-->
+	<link rel="stylesheet" type="text/css" href="response/css/nosass.css" media="all"> <!--客製樣式NO SASS-->
+	<script type="text/javascript" src="response/response.min.js"></script> <!--響應式主程式-->
+	<script type="text/javascript" src="response/js/custom.js"></script> <!--客製設定-->
+
+	<!-- initial -->
+	<script>
+		$(function(){
+			$.simplecart({
+				//mode: 'enq',
+				format: 'string'
+			});
+		})
+	</script>
+
+	<style>
+		body{
+			font-family: Arial, '微軟正黑體';
+		}
+		.itemList img{
+			border:5px solid #F2E8E8;
+			border-radius:10px;
+			box-shadow:0 0 10px #F2E8E8;
+		}
+		.itemList h1{
+			
+			font-size:20px;
+			font-weight: normal;
+			margin:5px;
+		}
+		.btn{
+			text-decoration: none;
+			padding:6px 10px;
+			background:#522424;
+			color:#fff;
+			border-radius:5px;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div class="resRow">
+		<div class="resCol12"><div class="resPadding">
+			<img src="img/logo.png" alt="" style="margin:0 auto;">
+		</div></div>
+	</div>
+
+	<div class="resRow itemList">
+		<div class="resCol12"><div class="resMargin item">
+			<!-- Send the fields that program need -->
+            <div class="inquiries_container">
+                <label for="inquiries_block">
+                	<i class="fa fa-shopping-cart" aria-hidden="true"></i> 訂購清單
+                </label>
+                <div id="inquiries_block"></div>
+                <input type="hidden" name="enquiries" value="" />
+            </div>
+            <a href="index.html" class="btn">繼續購物</a>
+		</div></div>
+		<div class="resCol12"><div class="resMargin item">
+			<table class="resTable">
+				<tr>
+					<th>欄位</th>
+					<td><input type="text" name="field1" /></td>
+				</tr>
+				<tr>
+					<th>欄位</th>
+					<td><input type="text" name="field1" /></td>
+				</tr>
+				<tr>
+					<th>欄位</th>
+					<td><input type="text" name="field1" /></td>
+				</tr>
+				<tr>
+					<th>欄位</th>
+					<td><input type="text" name="field1" /></td>
+				</tr>
+				<tr>
+					<th>欄位</th>
+					<td><input type="text" name="field1" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" name="送出" />
+						<input type="reset" name="取消" />
+					</td>
+				</tr>
+			</table>
+		</div></div>
+	</div>
+                        
+	
+</body>
+</html>
