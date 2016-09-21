@@ -1,5 +1,5 @@
 //simple cart.js
-//coder: jh
+//coder: JH
 //date: 2016/09/09
 
 (function ($, document, window) {
@@ -12,7 +12,6 @@
             storageName: "simplestorage",
             checkoutUrl: "checkout.html",
             format: 'json',
-            data: "data.json",
             tmp: {}
         };
         options = $.extend(defaults, options);
@@ -31,6 +30,7 @@
                 "price": '價格',
                 "no": '編號',
                 "name": '品名',
+                "clearCartBtn": '全部清空',
                 "submitBtn": "訂購",
                 "deleteBtn": '<i class="fa fa-trash" aria-hidden="true"></i> 刪除',
                 "no-item": "目前尚無任何項目!",
@@ -74,12 +74,29 @@
             return false;
         })
 
+        $(document).on('click','.clearAll_btn',function(){
+            fnClearCart();
+            return false;
+        })
+
         /*init cart*/
         function fnInitCart(){
             $("body").append('<div id="cart">');
+
+            if ($(window).width() >= 400) {
+               $("#cart").css({
+                    width: '250px'
+                }) 
+            }else{
+                $("#cart").css({
+                    width: '98%'
+                })
+            }
+            
             var currentList = fnGetData();
             fnUpdateCart(currentList);
             fnCheckInList();
+
         }
 
         /*get Tmp extension*/
@@ -237,6 +254,8 @@
                     sessionStorage.removeItem(storageName);
                 break;
             }
+
+            fnUpdateCart(fnGetData());
         }
 
         /*update field*/
@@ -268,18 +287,19 @@
                 break;
             }
 
-            
-
             fnUpdateCart(updateList);
         }
 
         /*toggle cart*/
         function fnToggleCart(target){
             if ($(target).hasClass("active")) {
-                $("#cart").animate({'height':'42px','width':'250px'},200);
+                var setW = ($(window).width() >= 400) ? '250px' : '98%';
+                var setPos = $(window).height() - 46;
+                $("#cart").animate({'top':setPos+'px','width':setW},200);
                 $(target).html('<span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>').removeClass("active");
             }else{
-                $("#cart").animate({'height':'99%','width':'400px'},200);
+                var setW = ($(window).width() >= 400) ? '400px' : '98%';
+                $("#cart").animate({'top':'0','width':setW},200);
                 $(target).html('<span><i class="fa fa-chevron-down" aria-hidden="true"></i></span>').addClass("active");
             }
         }
@@ -381,12 +401,14 @@
                               '<div class="item_name">'+fnGetTmpExt('name')+': '+data[i]['name']+'</div>'+
                               '<div class="item_no">'+fnGetTmpExt('quantity')+': <input class="pro-quantity-field" type="number" min="1" pro-no="'+data[i]['no']+'" value="'+data[i]['quantity']+'"></div>'+
                               checkout_price_data+
+                              '<div class="move_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-arrows" aria-hidden="true"></i></div>'+
                               '<div class="delete_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-trash" aria-hidden="true"></i></div>'+
-                        '</div>';
+                           '</div>';
 
                 /*update inquiries_block*/
                 inquiries_block_output += '<div class="item">'+
                                             '<div class="delete_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-trash" aria-hidden="true"></i></div>'+
+                                            '<div class="move_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-arrows" aria-hidden="true"></i></div>'+
                                             '<div class="item_num">'+data[i]['name']+
                                                 '<span class="amt_field">'+
                                                     checkout_list_data+
@@ -401,20 +423,33 @@
 
                 /*responsive pannel*/
                 responsive_output += '<div class="item">'+
-                                            '<div class="item_name">'+fnGetTmpExt('name')+': '+data[i]['name']+'</div>'+
-                                            checkout_list_data_res+
-                                            '<div class="delete_btn" pro-no="'+data[i]['no']+'">X</div>'+
-                                      '</div>';
+                                            '<div class="delete_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-trash" aria-hidden="true"></i></div>'+
+                                            '<div class="move_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-arrows" aria-hidden="true"></i></div>'+
+                                            '<div class="item_num">'+data[i]['name']+
+                                                '<span class="amt_field">'+
+                                                    checkout_list_data+
+                                                '</span>'+
+                                            '</div>'+
+                                            '<div class="clear"></div>'+
+                                        '</div>';
             }
 
             /*update floating cart*/
-            output += '</div>';
+            output += '</div><div class="clearAll_btn"><i class="fa fa-trash" aria-hidden="true"></i> '+fnGetTmpExt('clearCartBtn')+'</div>';
             $("#cart").html(output);
-
             if (data.length > 0) {
-                $("#cart").slideDown(200);
+                if ($("#cart").css('top') == '100%') {
+                    var setPos = $(window).height() - 46;
+                    $("#cart").fadeIn(50).animate({'top':setPos+'px'},200);
+                    if ($(window).width() < 400) {
+                        $("body").animate({'padding-bottom':'50px'},200);
+                    }
+                }
             }else{
-                $("#cart").slideUp(200);
+                $("#cart").animate({'top':'100%'},200).fadeOut(200);
+                if ($(window).width() < 400) {
+                    $("body").animate({'padding-bottom':'0'},200);
+                }
             }
 
             /*update inquiries_block*/
@@ -442,7 +477,7 @@
                 responsive_output += '</div>';
             }
             
-            $("#enquiry_btn_pannelContent .menuList").html(responsive_output);
+            $("#resCart_btn_pannelContent .menuList").html(responsive_output);
 
             fnCheckInList();
 
@@ -451,6 +486,47 @@
                 var consoleMsg = 'Enquiries message: '+enquiries_message+'\n';
                 console.log(consoleMsg);
             }
+
+            fnUpdateSortUI();
+            
+        }
+
+        //update jquery ui sortable
+        function fnUpdateSortUI(){
+            var current, update;
+            $( ".list-wrapper" ).sortable({
+                connectWith: ".item",
+                handle: ".move_btn",
+                placeholder: "portlet-placeholder ui-corner-all",
+                start: function(e, ui) {
+                    current = ui.item.index();
+                },
+                stop: function(e, ui) {
+                    update = ui.item.index();
+                    fnUpdateSort(current,update);
+                }
+            });
+        }
+
+        //update sortable data
+        function fnUpdateSort(current,update){
+            var currentList = fnGetData();
+            var currentItem = currentList[current];
+            var updateItem = currentList[update];
+
+            currentList.splice(update, 1, currentItem);
+            currentList.splice(current, 1, updateItem);
+
+            switch(storageType) {
+                case 'local':
+                    localStorage.setItem(storageName, JSON.stringify(currentList));
+                break;
+                default:
+                    sessionStorage.setItem(storageName, JSON.stringify(currentList));
+                break;
+            }
+
+            fnUpdateCart(currentList);
         }
 
     }

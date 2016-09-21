@@ -3,16 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Demo</title>
-	
-	<!-- awesome fonts -->
-	<link rel="stylesheet" href="../cartjs/plugin/font-awesome-4.6.3/css/font-awesome.min.css">
+
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0" />
 	
 	<!-- jquery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	
+
 	<!-- carjs -->
-	<link href="../cartjs/css/cart.css" rel="stylesheet" type="text/css" />
-	<script id="cartscript" src="../cartjs/cart.js"></script>
+	<link href="../dist/cartjs.min.css" rel="stylesheet" type="text/css" />
+	<script id="cartscript" src="../dist/cartjs.min.js"></script>
 
 	<!-- response -->
 	<link rel="stylesheet" type="text/css" href="response/response.style1.min.css" media="all"> <!--預設響應式樣式-->
@@ -25,7 +24,6 @@
 	<script>
 		$(function(){
 			$.simplecart({
-				//mode: 'enq',
 				format: 'string'
 			});
 		})
@@ -71,7 +69,7 @@
                 <label for="inquiries_block">
                 	<i class="fa fa-shopping-cart" aria-hidden="true"></i> 訂購清單
                 </label>
-                <div id="inquiries_block"></div>
+                <div id="inquiries_block" class="list-wrapper"></div>
                 <input type="hidden" name="enquiries" value="" />
             </div>
             <a href="index.html" class="btn">繼續購物</a>

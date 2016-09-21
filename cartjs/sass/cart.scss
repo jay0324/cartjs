@@ -83,12 +83,11 @@
 #cart{
 	display:none;
 	position:fixed;
-	bottom:0;
+	top: 100%;
+	height: 99%;
 	right:0;
 	background:#000000;
 	padding:5px;
-	width:250px;
-	height:42px;
 	z-index:1000;
 	@include box-shadow(0,0,10px,#000);
 
@@ -98,14 +97,14 @@
 
 	.control_wrap{
 		position:relative;
-		margin-bottom:5px;
+		margin:0;
+		height:40px;
+		overflow:hidden;
 		.checkout_btn{
 			display:table;
-			width: 78%;
+			width: 85%;
 		    height: 32px;
-		    margin: 1%;
 		    padding: 1%;
-			border:1px solid #000;
 			background:#522424;
 			color:#fff;
 			float:left;
@@ -126,11 +125,9 @@
 		}
 		.expend_btn{
 			display:table;
-			width:12%;
+			width:10%;
 			height:32px;
-			margin:1%;
 			padding:1%;
-			border:1px solid #000;
 			background:#522424;
 			color:#fff;
 			float:right;
@@ -150,7 +147,8 @@
 		}
 	}
 	.list-wrapper{
-		height:94%;
+		position:relative;
+		height:calc(100% - 75px);
 		overflow:auto;
 		clear:both;
 		.item{
@@ -161,23 +159,53 @@
 		    padding: 1%;
 		    width: 96%;
 		    text-align: left;
-			.delete_btn{
-				padding:2px 8px;
+			.delete_btn,
+			.move_btn{
+				padding:3px 6px;
 				position:absolute;
-				top:2px;
-				right:2px;
 				background:#522424;
 				color:#fff;
 				cursor:pointer;
+				font-size:12px;
 				@include transition('background 0.5s');
 				&:hover{
 					background:#764646;
 				}
 			}
+			
+			.delete_btn{
+				top:2px;
+				right:2px;
+			}
+			.move_btn{
+				top:2px;
+				right:26px;
+			}
+
 			.pro-quantity-field{
 				width:60px;
 			}
 		}
+	}
+
+
+	.clearAll_btn{
+		height:30px;
+		overflow:hidden;
+		position: relative;
+	    bottom: 0;
+	    background: #522424;
+	    color:#fff;
+	    float: none;
+	    clear: both;
+	    width: 96%;
+	    padding: 5px 2%;
+	    text-align: center;
+	    cursor:pointer;
+		@include transition('background 0.5s');
+	    &:hover{
+	    	background:#794343;
+	    }
 	}
 }
 
@@ -202,7 +230,7 @@
 	
 		.item{
 			border: 1px solid #522424;
-    		padding: 5px 5px 5px 30px;
+    		padding: 5px 5px 5px 60px;
     		margin:5px;
     		background:#F2EDED;
 			width:auto;
@@ -218,11 +246,10 @@
 				height: auto;
     			width: 150px;
 			}
-			.delete_btn{
-				    padding: 0 5px;
+			.delete_btn,
+			.move_btn{
+				padding: 3px 6px;
 				position:absolute;
-				top:5px;
-				left:5px;
 				background:#fff;
 				cursor:pointer;
 				background:#522424;
@@ -233,6 +260,15 @@
 					color:#fff;
 					background:#764646;
 				}
+				font-size:12px;
+			}
+			.delete_btn{
+				top:5px;
+				left:33px;
+			}
+			.move_btn{
+				top:5px;
+				left:5px;
 			}
 			.pro-quantity-field{
 				width:40px;
@@ -248,6 +284,11 @@
 		}
 	}
 }
+
+/*jquery ui*/
+.portlet-placeholder {
+    height: 50px;
+} 
 
 @media screen and (max-width: 960px) {
 	.inquiries_container #inquiries_block .item .delete_btn .fa,

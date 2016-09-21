@@ -3,16 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Demo</title>
-	
-	<!-- awesome fonts -->
-	<link rel="stylesheet" href="../cartjs/plugin/font-awesome-4.6.3/css/font-awesome.min.css">
+
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0" />
 	
 	<!-- jquery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
 	<!-- carjs -->
-	<link href="../cartjs/css/cart.css" rel="stylesheet" type="text/css" />
-	<script id="cartscript" src="../cartjs/cart.js"></script>
+	<link href="../dist/cartjs.min.css" rel="stylesheet" type="text/css" />
+	<script id="cartscript" src="../dist/cartjs.min.js"></script>
 
 	<!-- response -->
 	<link rel="stylesheet" type="text/css" href="response/response.style1.min.css" media="all"> <!--預設響應式樣式-->
@@ -33,12 +32,21 @@
 	<style>
 		body{
 			font-family: Arial, '微軟正黑體';
+			padding:0;
+			margin:0;
 		}
-		.itemList img{
+
+		.itemList .item{
+			margin:5% !important;
+		}
+
+		.itemList a.img-btn{
+			display:block;
 			border:5px solid #F2E8E8;
 			border-radius:10px;
 			box-shadow:0 0 10px #F2E8E8;
 		}
+
 		.itemList h1{
 			font-family: Arial, '微軟正黑體';
 			font-size:20px;
@@ -65,10 +73,10 @@
 	</div>
 	
 
-	<h2>列表來自網頁結構中</h2>
+	<h2>項目列表</h2>
 	<div class="resRow itemList">
 		<div class="resCol3"><div class="resMargin item">
-			<img src="img/default.png" alt="">
+			<a href="#" class="img-btn"><img src="img/default.png" alt=""></a>
 			<h1>產品一</h1>
 			<!-- list inquiry btn -->
             <div class="list_inquiry_box">
@@ -79,7 +87,7 @@
             </div>
 		</div></div>
 		<div class="resCol3"><div class="resMargin item">
-			<img src="img/default.png" alt="">
+			<a href="#" class="img-btn"><img src="img/default.png" alt=""></a>
 			<h1>產品二</h1>
 			<!-- list inquiry btn -->
             <div class="list_inquiry_box">
@@ -90,7 +98,7 @@
             </div>
 		</div></div>
 		<div class="resCol3"><div class="resMargin item">
-			<img src="img/default.png" alt="">
+			<a href="#" class="img-btn"><img src="img/default.png" alt=""></a>
 			<h1>產品三</h1>
 			<!-- list inquiry btn -->
             <div class="list_inquiry_box">
@@ -101,28 +109,13 @@
             </div>
 		</div></div>
 		<div class="resCol3"><div class="resMargin item">
-			<img src="img/default.png" alt="">
+			<a href="#" class="img-btn"><img src="img/default.png" alt=""></a>
 			<h1>產品四</h1>
 			<!-- list inquiry btn -->
             <div class="list_inquiry_box">
                 <label>數量:</label>
                 <input type="number" class="pro-quantity-field" pro-no="004" value="1" min="1" />
                 <a href="#" class="inquiry_btn" pro-no="004" pro-name="產品四" pro-price="400"></a>
-                <div class="clear"></div>
-            </div>
-		</div></div>
-	</div>
-
-	<h2>列表來自JSON格式文件</h2>
-	<div class="resRow itemList">
-		<div class="resCol3"><div class="resMargin item">
-			<img src="img/default.png" alt="">
-			<h1>產品一</h1>
-			<!-- list inquiry btn -->
-            <div class="list_inquiry_box">
-                <label>數量:</label>
-                <input type="number" class="pro-quantity-field" pro-no="001" value="1" min="1" />
-                <a href="#" class="inquiry_btn" pro-no="001" pro-name="產品一" pro-price="100"></a>
                 <div class="clear"></div>
             </div>
 		</div></div>
