@@ -437,20 +437,6 @@
             /*update floating cart*/
             output += '</div><div class="clearAll_btn"><i class="fa fa-trash" aria-hidden="true"></i> '+fnGetTmpExt('clearCartBtn')+'</div>';
             $("#cart").html(output);
-            if (data.length > 0) {
-                if ($("#cart").css('top') == '100%') {
-                    var setPos = $(window).height() - 46;
-                    $("#cart").fadeIn(50).animate({'top':setPos+'px'},200);
-                    if ($(window).width() < 400) {
-                        $("body").animate({'padding-bottom':'50px'},200);
-                    }
-                }
-            }else{
-                $("#cart").animate({'top':'100%'},200).fadeOut(200);
-                if ($(window).width() < 400) {
-                    $("body").animate({'padding-bottom':'0'},200);
-                }
-            }
 
             /*update inquiries_block*/
             if (data.length <= 0) {
@@ -488,6 +474,23 @@
             }
 
             fnUpdateSortUI();
+
+
+            if (data.length > 0) {
+                if ($("#cart").css('top') == '100%') {
+                    //var setPos = $(window).height() - 46;
+                    //alert($(window).height()+":"+window.innerHeight);
+                    $("#cart").fadeIn(50).animate({'top':'100%'},200).animate({'top':'-=46px'},50);
+                    if ($(window).width() < 400) {
+                        $("body").animate({'padding-bottom':'46px'},200);
+                    }
+                }
+            }else{
+                $("#cart").animate({'top':'100%'},200).fadeOut(200);
+                if ($(window).width() < 400) {
+                    $("body").animate({'padding-bottom':'0'},200);
+                }
+            }
             
         }
 

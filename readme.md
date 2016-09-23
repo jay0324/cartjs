@@ -1,9 +1,9 @@
-CARTJS
-簡單購物車
+CARTJS 簡單購物車
+======================
 
-使用方式
-
-#項目按鈕======================
+#項目按鈕
+-------------
+```
 <!-- list inquiry btn -->
 <div class="list_inquiry_box">
     <label>數量:</label>
@@ -11,8 +11,12 @@ CARTJS
     <a href="#" class="inquiry_btn" pro-no="項目編號" pro-name="項目名稱" pro-price="價格"></a>
     <div class="clear"></div>
 </div>
+```
 
-#表單區列表===================
+
+#表單區列表
+-------------
+```
 <!-- Send the fields that program need -->
 <div class="inquiries_container">
     <label for="inquiries_block">
@@ -21,8 +25,12 @@ CARTJS
     <div id="inquiries_block" class="list-wrapper"></div>
     <input type="hidden" name="enquiries" value="" />
 </div>
+```
 
-#引用程式=====================
+
+#引用程式
+-------------
+```
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
@@ -35,8 +43,11 @@ CARTJS
 		$.simplecart();
 	})
 </script>
+```
 
-#設定值===========================
+#設定值
+-------------
+```
 $.simplecart({
 	mode: (String)(模式: 購物: cart (預設), 詢價: inq),
     debug: (Boolean)(Console出form的值:不顯示: false (預設), 顯示: true),
@@ -65,7 +76,8 @@ $.simplecart({
         "custom-submit-msg": '品名: {name} 數量: {quantity} 價格: {price||format_price} \n'
     }
 })
+```
 
-
-#備註==============================
+#備註
+-------------
 dist資料夾中的檔案已把外掛都打包起來了，可以直接用即可
