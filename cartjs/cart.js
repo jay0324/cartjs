@@ -70,7 +70,7 @@
         })
 
         $(document).on('click','.expend_btn',function(){
-            fnToggleCart($(this));
+            fnToggleCart($(this),'');
             return false;
         })
 
@@ -291,17 +291,40 @@
         }
 
         /*toggle cart*/
-        function fnToggleCart(target){
-            if ($(target).hasClass("active")) {
-                var setW = ($(window).width() >= 400) ? '250px' : '98%';
-                var setPos = $(window).height() - 46;
-                $("#cart").animate({'top':setPos+'px','width':setW},200);
-                $(target).html('<span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>').removeClass("active");
-            }else{
-                var setW = ($(window).width() >= 400) ? '400px' : '98%';
-                $("#cart").animate({'top':'0','width':setW},200);
-                $(target).html('<span><i class="fa fa-chevron-down" aria-hidden="true"></i></span>').addClass("active");
+        function fnToggleCart(target,$state){
+            switch ($state) {
+                case 'clear':
+                    if ($(window).width() >= 400) {
+                        var setW = '250px';
+                    }else{
+                        var setW = '98%';
+                        $("body").animate({'padding-bottom':'0'},200);
+                    }
+                    $("#cart").animate({'top':'100%','width':setW},200).fadeOut(200);
+                    $(".expend_btn").html('<span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>').removeClass("active");
+                break;
+                case 'restart':
+                    if ($("#cart").css('top') == '100%') {
+                        if ($(window).width() < 400) {
+                            $("body").animate({'padding-bottom':'46px'},200);
+                        }
+                        $("#cart").fadeIn(50).animate({'top':'100%'},200).animate({'top':'-=46px'},50);
+                    }
+                break;
+                default:
+                    if ($(target).hasClass("active")) {
+                        var setW = ($(window).width() >= 400) ? '250px' : '98%';
+                        var setPos = $(window).height() - 46;
+                        $("#cart").animate({'top':setPos+'px','width':setW},200);
+                        $(target).html('<span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>').removeClass("active");
+                    }else{
+                        var setW = ($(window).width() >= 400) ? '400px' : '98%';
+                        $("#cart").animate({'top':'0','width':setW},200);
+                        $(target).html('<span><i class="fa fa-chevron-down" aria-hidden="true"></i></span>').addClass("active");
+                    }
+                break;
             }
+            
         }
 
         /*check the item is in the list*/
@@ -477,19 +500,9 @@
 
 
             if (data.length > 0) {
-                if ($("#cart").css('top') == '100%') {
-                    //var setPos = $(window).height() - 46;
-                    //alert($(window).height()+":"+window.innerHeight);
-                    $("#cart").fadeIn(50).animate({'top':'100%'},200).animate({'top':'-=46px'},50);
-                    if ($(window).width() < 400) {
-                        $("body").animate({'padding-bottom':'46px'},200);
-                    }
-                }
+                fnToggleCart($(".expend_btn"),'restart');
             }else{
-                $("#cart").animate({'top':'100%'},200).fadeOut(200);
-                if ($(window).width() < 400) {
-                    $("body").animate({'padding-bottom':'0'},200);
-                }
+                fnToggleCart($(".expend_btn"),'clear');
             }
             
         }
