@@ -77,14 +77,15 @@
 			color:#fff;
 		}
 	}
+
 }
 
 /* cart floting box */
 #cart{
 	display:none;
 	position:fixed;
-	top: 100%;
-	height: 99%;
+	bottom: 0;
+	height: auto;
 	right:0;
 	background:#000000;
 	padding:5px;
@@ -101,10 +102,10 @@
 		height:40px;
 		overflow:hidden;
 		.checkout_btn{
-			display:table;
-			width: 85%;
-		    height: 32px;
-		    padding: 1%;
+			display:block;
+			width: 83%;
+		    height: 30px;
+		    padding: 5px 2%;
 			background:#522424;
 			color:#fff;
 			float:left;
@@ -115,19 +116,26 @@
 				background:#794343;
 				text-decoration: none;
 			}
-			span{
-				display:table-cell;
-				width:96%;
-				height:98%;
-				padding:1% 2%;
-				vertical-align: middle;
-			}
+
+			&::before{
+              content: '';
+              display: inline-block;
+              vertical-align: middle;
+              width: 0;
+              height: 100%;
+            }
+
+            span{
+                  display: inline-block;
+                  vertical-align: middle;/* 保证文字垂直居中 */
+            }
+
 		}
 		.expend_btn{
 			display:table;
-			width:10%;
-			height:32px;
-			padding:1%;
+			width:8%;
+		    height: 30px;
+		    padding: 5px 2%;
 			background:#522424;
 			color:#fff;
 			float:right;
@@ -137,13 +145,19 @@
 			&:hover{
 				background:#794343;
 			}
-			span{
-				display:table-cell;
-				width:96%;
-				height:98%;
-				padding:1% 2%;
-				vertical-align: middle;
-			}
+
+			&::before{
+              content: '';
+              display: inline-block;
+              vertical-align: middle;
+              width: 0;
+              height: 100%;
+            }
+
+            span{
+                  display: inline-block;
+                  vertical-align: middle;/* 保证文字垂直居中 */
+            }
 		}
 	}
 	.list-wrapper{
@@ -161,16 +175,34 @@
 		    text-align: left;
 			.delete_btn,
 			.move_btn{
-				padding:3px 6px;
+				width:20px;
+				height:20px;
 				position:absolute;
+				background:#fff;
+				cursor:pointer;
 				background:#522424;
 				color:#fff;
-				cursor:pointer;
-				font-size:12px;
+				text-align: center;
+		        font-size:12px;
 				@include transition('background 0.5s');
+				@include border-radius(2px);
 				&:hover{
+					color:#fff;
 					background:#764646;
 				}
+				&::before{
+		          content: '';
+		          display: inline-block;
+		          vertical-align: middle;
+		          width: 0;
+		          height: 100%;
+		        }
+
+		        span.i-center{
+		            display: inline-block;
+		            vertical-align: middle;/* 保证文字垂直居中 */
+		        }
+
 			}
 			
 			.delete_btn{
@@ -184,6 +216,17 @@
 
 			.pro-quantity-field{
 				width:60px;
+				padding: 3px;
+			    @include border-radius(5px);
+			    border: 1px solid #aaa;
+			}
+
+			.item_name{
+				word-break: break-all;
+				margin-bottom:5px;
+			}
+			.item_no{
+				margin-bottom:5px;
 			}
 		}
 	}
@@ -206,6 +249,19 @@
 	    &:hover{
 	    	background:#794343;
 	    }
+
+	    &::before{
+          content: '';
+          display: inline-block;
+          vertical-align: middle;
+          width: 0;
+          height: 100%;
+        }
+
+        span{
+              display: inline-block;
+              vertical-align: middle;/* 保证文字垂直居中 */
+        }
 	}
 }
 
@@ -230,12 +286,17 @@
 	
 		.item{
 			border: 1px solid #522424;
-    		padding: 5px 5px 5px 60px;
+    		padding: 5px;
     		margin:5px;
     		background:#F2EDED;
 			width:auto;
     		position:relative;
     		@include border-radius(3px);
+	
+			.clear{
+				clear:both;
+			}
+
 			.btn{
 				float:left;
 				padding:5px 10px;
@@ -248,23 +309,37 @@
 			}
 			.delete_btn,
 			.move_btn{
-				padding: 3px 6px;
+				width:20px;
+				height:20px;
 				position:absolute;
 				background:#fff;
 				cursor:pointer;
 				background:#522424;
 				color:#fff;
-				@include border-radius(2px);
+				font-size:12px;
+				text-align: center;
 				@include transition('background 0.5s');
+				@include border-radius(2px);
 				&:hover{
 					color:#fff;
 					background:#764646;
 				}
-				font-size:12px;
+				&::before{
+		          content: '';
+		          display: inline-block;
+		          vertical-align: middle;
+		          width: 0;
+		          height: 100%;
+		        }
+
+		        span.i-center{
+		            display: inline-block;
+		        	vertical-align: middle;/* 保证文字垂直居中 */
+		        }
 			}
 			.delete_btn{
 				top:5px;
-				left:33px;
+				left:30px;
 			}
 			.move_btn{
 				top:5px;
@@ -272,9 +347,18 @@
 			}
 			.pro-quantity-field{
 				width:40px;
+				padding: 3px;
+			    @include border-radius(5px);
+			    border: 1px solid #aaa;
 			}
 			.amt_field{
 				float:right;
+			}
+
+			.item_num{
+				clear:both;
+				margin:3px 0;
+				word-break: break-all;
 			}
 		}
 
@@ -288,11 +372,13 @@
 /*jquery ui*/
 .portlet-placeholder {
     height: 50px;
-} 
+}
 
 @media screen and (max-width: 960px) {
-	.inquiries_container #inquiries_block .item .delete_btn .fa,
-	#cart .fa{
+	.inquiries_container #inquiries_block .item .delete_btn [class^="icon-"],
+	.inquiries_container #inquiries_block .item .delete_btn [class*=" icon-"],
+	#cart [class^="icon-"], 
+	#cart [class*=" icon-"]{
 	    font-size:12px !important;
 	    display:inline-block;
 	}

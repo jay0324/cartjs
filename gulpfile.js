@@ -38,7 +38,7 @@ gulp.task('sass', function(end) {
   setTimeout(function() {end(); }, 1200); //make sure the process end
 
   gulp.src([
-        'cartjs/plugin/font-awesome-4.6.3/css/font-awesome.min.css',
+        'cartjs/plugin/icon/style.css',
         'cartjs/css/cart.css'
       ])
       .pipe(concatCss("cartjs.min.css"))
@@ -48,4 +48,8 @@ gulp.task('sass', function(end) {
       .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
       .pipe(insert.prepend(insertString))
       .pipe(gulp.dest('dist/'));
+
+  //put fonts to dist
+  gulp.src('cartjs/plugin/icon/fonts/*')
+    .pipe(gulp.dest('dist/fonts/'));
 });

@@ -32,12 +32,12 @@
                 "name": '品名',
                 "clearCartBtn": '全部清空',
                 "submitBtn": "訂購",
-                "deleteBtn": '<i class="fa fa-trash" aria-hidden="true"></i> 刪除',
+                "deleteBtn": '<span class="icon-trash"></span> 刪除',
                 "no-item": "目前尚無任何項目!",
                 "tmpString1": '詢問 {var1} 項商品, 共 {var2} 件 / 總金額 {var3}',
                 "tmpString2": '詢問 {var1} 項商品, 共 {var2} 件',
-                "tmpString3": '<i class="fa fa-envelope" aria-hidden="true"></i> 送出詢問函</span>',
-                "tmpString4": '<i class="fa fa-shopping-cart" aria-hidden="true"></i> 結帳 (總計 {var1})',
+                "tmpString3": '<span class="icon-envelope"></span> 送出詢問函</span>',
+                "tmpString4": '<span class="icon-shopping-cart"></span> 結帳 (總計 {var1})',
                 "tmpString5": '{var1} 結帳',
                 "tmpString6": '送出詢問函',
                 "custom-submit-msg": '品名: {name} 數量: {quantity} 價格: {price||format_price} \n'
@@ -294,33 +294,43 @@
         function fnToggleCart(target,$state){
             switch ($state) {
                 case 'clear':
-                    if ($(window).width() >= 400) {
-                        var setW = '250px';
-                    }else{
-                        var setW = '98%';
-                        $("body").animate({'padding-bottom':'0'},200);
-                    }
-                    $("#cart").animate({'top':'100%','width':setW},200).fadeOut(200);
-                    $(".expend_btn").html('<span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>').removeClass("active");
+                    //console.log('clear');
+                    var setW = ($(window).width() >= 400) ? '400px' : '98%';
+                    $("body").css({'padding-bottom':'0'});
+                    $("#cart").fadeOut(50);
+                    $("#cart .list-wrapper,#cart .clearAll_btn").hide();
+                    $("#cart .expend_btn").html('<span class="icon-chevron-up"></span>').removeClass("active");
                 break;
                 case 'restart':
-                    if ($("#cart").css('top') == '100%') {
-                        if ($(window).width() < 400) {
-                            $("body").animate({'padding-bottom':'46px'},200);
-                        }
-                        $("#cart").fadeIn(50).animate({'top':'100%'},200).animate({'top':'-=46px'},50);
+                    //console.log('restart');
+                    $("#cart").show();
+                    if ($(window).width() < 400) {
+                        $("body").css({'padding-bottom':'46px'});
+                    }
+                    if ($("#cart .expend_btn").hasClass("active")) {
+                        var setW = ($(window).width() >= 400) ? '400px' : '98%';
+                        $("#cart").animate({'width':setW,'height':'99%'},200);
+                        $("#cart .list-wrapper,#cart .clearAll_btn").show();
+                        $("#cart .expend_btn").html('<span class="icon-chevron-down"></span>').addClass("active");
+                    }else{
+                        var setW = ($(window).width() >= 400) ? '250px' : '98%';
+                        $("#cart").css({'width':setW,'height':'auto'});
+                        $("#cart .list-wrapper,#cart .clearAll_btn").hide();
+                        $("#cart .expend_btn").html('<span class="icon-chevron-up"></span>').removeClass("active");
                     }
                 break;
                 default:
+                    //console.log('default');
                     if ($(target).hasClass("active")) {
                         var setW = ($(window).width() >= 400) ? '250px' : '98%';
-                        var setPos = $(window).height() - 46;
-                        $("#cart").animate({'top':setPos+'px','width':setW},200);
-                        $(target).html('<span><i class="fa fa-chevron-up" aria-hidden="true"></i></span>').removeClass("active");
+                        $("#cart").css({'width':setW,'height':'auto'});
+                        $("#cart .list-wrapper,#cart .clearAll_btn").hide();
+                        $("#cart .expend_btn").html('<span class="icon-chevron-up"></span>').removeClass("active");
                     }else{
                         var setW = ($(window).width() >= 400) ? '400px' : '98%';
-                        $("#cart").animate({'top':'0','width':setW},200);
-                        $(target).html('<span><i class="fa fa-chevron-down" aria-hidden="true"></i></span>').addClass("active");
+                        $("#cart").animate({'width':setW,'height':'99%'},200);
+                        $("#cart .list-wrapper,#cart .clearAll_btn").show();
+                        $("#cart .expend_btn").html('<span class="icon-chevron-down"></span>').addClass("active");
                     }
                 break;
             }
@@ -372,10 +382,10 @@
 
             /*update floating cart*/
             if ($(".expend_btn").hasClass("active")) {
-                var expendIcon = '<i class="fa fa-chevron-down" aria-hidden="true"></i>';
+                var expendIcon = '<span class="icon-chevron-down"></span>';
                 var expendIconState = ' active';
             }else{
-                var expendIcon = '<i class="fa fa-chevron-up" aria-hidden="true"></i>';
+                var expendIcon = '<span class="icon-chevron-up"></span>';
                 var expendIconState = '';
             } 
             var output = '<div class="control_wrap">'+
@@ -421,22 +431,22 @@
 
                 /*update floating cart*/
                 output += '<div class="item">'+
-                              '<div class="item_name">'+fnGetTmpExt('name')+': '+data[i]['name']+'</div>'+
                               '<div class="item_no">'+fnGetTmpExt('quantity')+': <input class="pro-quantity-field" type="number" min="1" pro-no="'+data[i]['no']+'" value="'+data[i]['quantity']+'"></div>'+
+                              '<div class="item_name">'+fnGetTmpExt('name')+': '+data[i]['name']+'</div>'+
                               checkout_price_data+
-                              '<div class="move_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-arrows" aria-hidden="true"></i></div>'+
-                              '<div class="delete_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-trash" aria-hidden="true"></i></div>'+
+                              '<div class="move_btn" pro-no="'+data[i]['no']+'"><span class="i-center"><span class="icon-arrows"></span></span></div>'+
+                              '<div class="delete_btn" pro-no="'+data[i]['no']+'"><span class="i-center"><span class="icon-trash"></span></span></div>'+
                            '</div>';
 
                 /*update inquiries_block*/
                 inquiries_block_output += '<div class="item">'+
-                                            '<div class="delete_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-trash" aria-hidden="true"></i></div>'+
-                                            '<div class="move_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-arrows" aria-hidden="true"></i></div>'+
-                                            '<div class="item_num">'+data[i]['name']+
-                                                '<span class="amt_field">'+
-                                                    checkout_list_data+
-                                                '</span>'+
+                                            '<div class="control">'+
+                                                '<div class="delete_btn" pro-no="'+data[i]['no']+'"><span class="i-center"><span class="icon-trash"></span></span></div>'+
+                                                '<div class="move_btn" pro-no="'+data[i]['no']+'"><span class="i-center"><span class="icon-arrows"></span></span></div>'+
+                                                '<div class="amt_field">'+checkout_list_data+'</div>'+
+                                                '<div class="clear"></div>'+
                                             '</div>'+
+                                            '<div class="item_num">'+data[i]['name']+'</div>'+
                                             '<div class="clear"></div>'+
                                         '</div>';
 
@@ -446,8 +456,8 @@
 
                 /*responsive pannel*/
                 responsive_output += '<div class="item">'+
-                                            '<div class="delete_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-trash" aria-hidden="true"></i></div>'+
-                                            '<div class="move_btn" pro-no="'+data[i]['no']+'"><i class="fa fa-arrows" aria-hidden="true"></i></div>'+
+                                            '<div class="delete_btn" pro-no="'+data[i]['no']+'"><span class="icon-trash"></span></div>'+
+                                            '<div class="move_btn" pro-no="'+data[i]['no']+'"><span class="icon-arrows"></span></div>'+
                                             '<div class="item_num">'+data[i]['name']+
                                                 '<span class="amt_field">'+
                                                     checkout_list_data+
@@ -458,12 +468,14 @@
             }
 
             /*update floating cart*/
-            output += '</div><div class="clearAll_btn"><i class="fa fa-trash" aria-hidden="true"></i> '+fnGetTmpExt('clearCartBtn')+'</div>';
+            output += '</div><div class="clearAll_btn"><span><span class="icon-trash"></span> '+fnGetTmpExt('clearCartBtn')+'</span></div>';
             $("#cart").html(output);
 
             /*update inquiries_block*/
             if (data.length <= 0) {
                 inquiries_block_output = fnGetTmpExt('no-item');
+            }else{
+                inquiries_block_output = '<div class="list-wrapper">'+inquiries_block_output+'</div>';
             }
             $("#inquiries_block").html(inquiries_block_output+'<div class="total_price">'+inquiries_block_note+'</div>');
 
@@ -514,6 +526,7 @@
                 connectWith: ".item",
                 handle: ".move_btn",
                 placeholder: "portlet-placeholder ui-corner-all",
+                axis: "y",
                 start: function(e, ui) {
                     current = ui.item.index();
                 },
