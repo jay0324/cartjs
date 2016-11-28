@@ -79,6 +79,10 @@
             return false;
         })
 
+        $(window).resize(function(){
+            fnToggleCart($(".expend_btn"),'reSize');
+        })
+
         /*init cart*/
         function fnInitCart(){
             $("body").append('<div id="cart">');
@@ -292,11 +296,17 @@
 
         /*toggle cart*/
         function fnToggleCart(target,$state){
+            var currentList = fnGetData();
+            if ($(window).width() < 400 && currentList.length > 0) {
+                $("body").css({'padding-bottom':'46px'});
+            }else{
+                $("body").css({'padding-bottom':'0'});
+            }
+
             switch ($state) {
                 case 'clear':
                     //console.log('clear');
                     var setW = ($(window).width() >= 400) ? '400px' : '98%';
-                    $("body").css({'padding-bottom':'0'});
                     $("#cart").fadeOut(50);
                     $("#cart .list-wrapper,#cart .clearAll_btn").hide();
                     $("#cart .expend_btn").html('<span class="icon-chevron-up"></span>').removeClass("active");
@@ -304,9 +314,6 @@
                 case 'restart':
                     //console.log('restart');
                     $("#cart").show();
-                    if ($(window).width() < 400) {
-                        $("body").css({'padding-bottom':'46px'});
-                    }
                     if ($("#cart .expend_btn").hasClass("active")) {
                         var setW = ($(window).width() >= 400) ? '400px' : '98%';
                         $("#cart").animate({'width':setW,'height':'99%'},200);
@@ -317,6 +324,25 @@
                         $("#cart").css({'width':setW,'height':'auto'});
                         $("#cart .list-wrapper,#cart .clearAll_btn").hide();
                         $("#cart .expend_btn").html('<span class="icon-chevron-up"></span>').removeClass("active");
+                    }
+                break;
+                case 'reSize':
+                    if ($("#cart .expend_btn").hasClass("active")) {
+                        if ($(window).width() < 400) {
+                            var setW = '98%';
+                            $("#cart").css({'width':setW});
+                        }else{
+                            var setW = '400px';
+                            $("#cart").css({'width':setW});
+                        }
+                    }else{
+                        if ($(window).width() < 400) {
+                            var setW = '98%';
+                            $("#cart").css({'width':setW});
+                        }else{
+                            var setW = '250px';
+                            $("#cart").css({'width':setW});
+                        }
                     }
                 break;
                 default:
