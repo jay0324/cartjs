@@ -1,34 +1,34 @@
-CARTJS 簡單購物車
-======================
+CARTJS Simple JQuery Cart
+=========================
 
-#項目按鈕
+#Item Inquiry/Order button
 -------------
 ```
 <!-- list inquiry btn -->
 <div class="list_inquiry_box">
-    <label>數量:</label>
-    <input type="number" class="pro-quantity-field" pro-no="項目編號" value="1" min="1" />
-    <a href="#" class="inquiry_btn" pro-no="項目編號" pro-name="項目名稱" pro-price="價格"></a>
+    <label>Qty:</label>
+    <input type="number" class="pro-quantity-field" pro-no="{item No}" value="1" min="1" />
+    <a href="#" class="inquiry_btn" pro-no="{item No}" pro-name="{item Name}" pro-price="{item Price}"></a>
     <div class="clear"></div>
 </div>
 ```
 
 
-#表單區列表
+#Form input field
 -------------
 ```
 <!-- Send the fields that program need -->
 <div class="inquiries_container">
     <label for="inquiries_block">
-    	<i class="fa fa-shopping-cart" aria-hidden="true"></i> 訂購清單
+    	<i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out List
     </label>
     <div id="inquiries_block" class="list-wrapper"></div>
-    <input type="hidden" name="enquiries" value="" />
+    <input id="enquiries_data" type="hidden" name="enquiries" value="" />
 </div>
 ```
 
 
-#引用程式
+#Jquery cartjs plugin
 -------------
 ```
 <!-- jquery -->
@@ -45,39 +45,64 @@ CARTJS 簡單購物車
 </script>
 ```
 
-#設定值
+#Custom Setup
 -------------
 ```
 $.simplecart({
-	mode: (String)(模式: 購物: cart (預設), 詢價: inq),
-    debug: (Boolean)(Console出form的值:不顯示: false (預設), 顯示: true),
-    storageType: (String)(存取資料的方式: 暫存: session(預設), 永久: local),
-    storageName: (String)(存取資料集名稱: simplestorage (預設)),
-    checkoutUrl: (String)(表單連結: checkout.html(預設)),
-    format: (String)(表單欄位值: json: json格式(預設), str: 自訂字串),
+	mode: (String)(Mode: Shopping Cart: cart (default), Inquiries: inq),
+    debug: (Boolean)(Console form value:Hide: false (default), Show: true),
+    storageType: (String)(Storage: tmp per windows: session(default), tmp for browser: local),
+    storageName: (String)(storage name: simplestorage (default)),
+    checkoutUrl: (String)(check out form url: checkout.html(default)),
+    format: (String)(submit data: json: json(default), str: custom data defined by tmp->custom-submit-msg),
     tmp: {
-    	(obj)(內建UI顯示文字及範本,預設值如下)
+    	(obj)(UI text and template)
 
-        "quantity": '數量',
+        "quantity": 'Qty.',
         "currency": '$',
-        "price": '價格',
-        "no": '編號',
-        "name": '品名',
-        "clearCartBtn": '全部清空',
-        "submitBtn": "訂購",
-        "deleteBtn": '<i class="fa fa-trash" aria-hidden="true"></i> 刪除',
-        "no-item": "目前尚無任何項目!",
-        "tmpString1": '詢問 {var1} 項商品, 共 {var2} 件 / 總金額 {var3}',
-        "tmpString2": '詢問 {var1} 項商品, 共 {var2} 件',
-        "tmpString3": '<i class="fa fa-envelope" aria-hidden="true"></i> 送出詢問函</span>',
-        "tmpString4": '<i class="fa fa-shopping-cart" aria-hidden="true"></i> 結帳 (總計 {var1})',
-        "tmpString5": '{var1} 結帳',
-        "tmpString6": '送出詢問函',
-        "custom-submit-msg": '品名: {name} 數量: {quantity} 價格: {price||format_price} \n'
+        "price": 'Price',
+        "no": 'No',
+        "name": 'Name',
+        "clearCartBtn": 'Remove All',
+        "submitBtn": "Check out",
+        "deleteBtn": '<span class="icon-trash"></span> Remove',
+        "no-item": "Nothing in Cart!",
+        "tmpString1": 'Order {var1} products, total {var2} items / subtotal {var3}',
+        "tmpString2": 'Inquire {var1} products, total {var2} items',
+        "tmpString3": '<span class="icon-envelope"></span> Inquiries</span>',
+        "tmpString4": '<span class="icon-shopping-cart"></span> Subtotal (total {var1})',
+        "tmpString5": '{var1} Checkout',
+        "tmpString6": 'Send Inquiries',
+        "custom-submit-msg": 'Product: {name} / Qty: {quantity} / Price: {price||format_price} \n'
     }
+
 })
 ```
 
-#備註
+#Note
 -------------
-dist資料夾中的檔案已把外掛都打包起來了，可以直接用即可
+"dist" folder contains require files，just copy this folder to your site root, and do the setup as above
+
+
+#chinese version tmp:
+-------------
+```
+tmp: {
+    "quantity": '數量',
+    "currency": '$',
+    "price": '價格',
+    "no": '編號',
+    "name": '品名',
+    "clearCartBtn": '全部清空',
+    "submitBtn": "訂購",
+    "deleteBtn": '<span class="icon-trash"></span> 刪除',
+    "no-item": "目前尚無任何項目!",
+    "tmpString1": '詢問 {var1} 項商品, 共 {var2} 件 / 總金額 {var3}',
+    "tmpString2": '詢問 {var1} 項商品, 共 {var2} 件',
+    "tmpString3": '<span class="icon-envelope"></span> 送出詢問函</span>',
+    "tmpString4": '<span class="icon-shopping-cart"></span> 結帳 (總計 {var1})',
+    "tmpString5": '{var1} 結帳',
+    "tmpString6": '送出詢問函',
+    "custom-submit-msg": '品名: {name} 數量: {quantity} 價格: {price||format_price} \n'
+}
+```

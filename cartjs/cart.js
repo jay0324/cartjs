@@ -25,23 +25,23 @@
         var format = options.format;
         var tmp = options.tmp;
         var tmpDefault = {
-                "quantity": '數量',
-                "currency": '$',
-                "price": '價格',
-                "no": '編號',
-                "name": '品名',
-                "clearCartBtn": '全部清空',
-                "submitBtn": "訂購",
-                "deleteBtn": '<span class="icon-trash"></span> 刪除',
-                "no-item": "目前尚無任何項目!",
-                "tmpString1": '詢問 {var1} 項商品, 共 {var2} 件 / 總金額 {var3}',
-                "tmpString2": '詢問 {var1} 項商品, 共 {var2} 件',
-                "tmpString3": '<span class="icon-envelope"></span> 送出詢問函</span>',
-                "tmpString4": '<span class="icon-shopping-cart"></span> 結帳 (總計 {var1})',
-                "tmpString5": '{var1} 結帳',
-                "tmpString6": '送出詢問函',
-                "custom-submit-msg": '品名: {name} 數量: {quantity} 價格: {price||format_price} \n'
-            };
+            "quantity": 'Qty.',
+            "currency": '$',
+            "price": 'Price',
+            "no": 'No',
+            "name": 'Name',
+            "clearCartBtn": 'Remove All',
+            "submitBtn": "Check out",
+            "deleteBtn": '<span class="icon-trash"></span> Remove',
+            "no-item": "Nothing in Cart!",
+            "tmpString1": 'Order {var1} products, total {var2} items / subtotal {var3}',
+            "tmpString2": 'Inquire {var1} products, total {var2} items',
+            "tmpString3": '<span class="icon-envelope"></span> Inquiries</span>',
+            "tmpString4": '<span class="icon-shopping-cart"></span> Subtotal (total {var1})',
+            "tmpString5": '{var1} Checkout',
+            "tmpString6": 'Send Inquiries',
+            "custom-submit-msg": 'Product: {name} / Qty: {quantity} / Price: {price||format_price} \n'
+        };
 
 
         fnInitCart();
@@ -514,7 +514,7 @@
             if (format == 'json') {
                 enquiries_message = fnGetListStr();
             }
-            $("input[name='enquiries']").val(enquiries_message);
+            $("input[id='enquiries_data']").val(enquiries_message);
             //console.log(enquiries_message);
 
             /*responsive pannel*/
