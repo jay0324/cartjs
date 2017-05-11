@@ -108,10 +108,9 @@ tmp: {
 ```
 
 #Clear storage
------------
+-------------
 for web form submition, after submit the data to server side, you need to manually clear the storage.
 The easy way to do it is to create a page with the code to trigger the [clearAll_btn] button event
------------
 ```
 //clear storage only
 $(".clearAll_btn").click();
