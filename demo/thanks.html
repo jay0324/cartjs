@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo</title>
+
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0" />
+	
+	<!-- jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<!-- carjs -->
+	<link href="../dist/cartjs.min.css" rel="stylesheet" type="text/css" />
+	<script id="cartscript" src="../dist/cartjs.min.js"></script>
+
+	<!-- response -->
+	<link rel="stylesheet" type="text/css" href="response/response.style1.min.css" media="all"> <!--預設響應式樣式-->
+	<link rel="stylesheet" type="text/css" href="response/css/sass.css" media="all"> <!--客製樣式 SASS-->
+	<link rel="stylesheet" type="text/css" href="response/css/nosass.css" media="all"> <!--客製樣式NO SASS-->
+	<script type="text/javascript" src="response/response.min.js"></script> <!--響應式主程式-->
+	<script type="text/javascript" src="response/js/custom.js"></script> <!--客製設定-->
+
+	<!-- initial -->
+	<script>
+		$(function(){
+			$.simplecart();
+
+			//clear storage
+			$(".clearAll_btn").click();var i = 5;setInterval(function(){$("#count").text(i);i--;},1000);setTimeout(function(){window.location = 'checkout.html';},5000);
+		})
+	</script>
+
+</head>
+<body>
+
+	<div class="resRow">
+		<div class="resCol12"><div class="resPadding">
+			<img src="img/logo.png" alt="" style="margin:0 auto;">
+		</div></div>
+	</div>
+
+	<center>Thanks for your Inquiry, we will redirect for you in <span id="count">5</span>sec!</center>
+                        
+	
+</body>
+</html>

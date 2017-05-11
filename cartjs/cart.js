@@ -366,7 +366,7 @@
         /*check the item is in the list*/
         function fnCheckInList(){
             var currentList = fnGetData();
-            $(".inquiry_btn").removeClass("active").text(fnGetTmpExt('submitBtn'));
+            $(".inquiry_btn").removeClass("active").html(fnGetTmpExt('submitBtn'));
             $(".inquiry_btn").each(function(){
                 var no = $(this).attr("pro-no");
                 for (var i = 0; i < currentList.length; i++) {

@@ -106,3 +106,19 @@ tmp: {
     "custom-submit-msg": '品名: {name} 數量: {quantity} 價格: {price||format_price} \n'
 }
 ```
+
+#Clear storage
+-----------
+for web form submition, after submit the data to server side, you need to manually clear the storage.
+The easy way to do it is to create a page with the code to trigger the [clearAll_btn] button event
+-----------
+```
+//clear storage only
+$(".clearAll_btn").click();
+
+//optional to clear storage and then return to anypage you want
+//it has a count down message to indicate sec to return
+//put this to html:
+//<center>Thanks for your Inquiry, we will redirect for you in <span id="count">5</span>sec!</center>
+$(".clearAll_btn").click();var i = 5;setInterval(function(){$("#count").text(i);i--;},1000);setTimeout(function(){window.location = 'RETURN_PAGE_URL';},5000);
+```
