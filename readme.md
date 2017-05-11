@@ -1,6 +1,10 @@
 CARTJS Simple JQuery Cart
 =========================
 
+#DEMO
+------
+https://jay0324.github.io/cartjs/demo/
+
 #Item Inquiry/Order button
 -------------
 ```
