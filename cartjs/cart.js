@@ -12,6 +12,7 @@
             storageName: "simplestorage",
             checkoutUrl: "checkout.html",
             format: 'json',
+            useFloatCart: true,
             tmp: {}
         };
         options = $.extend(defaults, options);
@@ -23,6 +24,7 @@
         var storageName = options.storageName;
         var checkoutUrl = options.checkoutUrl;
         var format = options.format;
+        var useFloatCart = options.useFloatCart;
         var tmp = options.tmp;
         var tmpDefault = {
             "quantity": 'Qty.',
@@ -85,16 +87,18 @@
 
         /*init cart*/
         function fnInitCart(){
-            $("body").append('<div id="cart">');
+            if (useFloatCart){
+                $("body").append('<div id="cart">');
 
-            if ($(window).width() >= 400) {
-               $("#cart").css({
-                    width: '250px'
-                }) 
-            }else{
-                $("#cart").css({
-                    width: '98%'
-                })
+                if ($(window).width() >= 400) {
+                   $("#cart").css({
+                        width: '250px'
+                    }) 
+                }else{
+                    $("#cart").css({
+                        width: '98%'
+                    })
+                }
             }
             
             var currentList = fnGetData();
